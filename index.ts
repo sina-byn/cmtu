@@ -7,10 +7,11 @@ type Resolver = string | { block: string } | { inline: string } | { block: strin
 type Options = {
   stringSensitive?: boolean;
   stringLiterals?: string[];
+  exclude?: RegExp[];
 };
 
 const cmtu = (resolver: Resolver, options?: Options) => {
-  const { stringSensitive, stringLiterals = DEFAULT_STRING_LITERALS } = options ?? {};
+  const { stringSensitive, stringLiterals = DEFAULT_STRING_LITERALS, exclude } = options ?? {};
 
   // * validation goes here
 
@@ -32,6 +33,8 @@ const cmtu = (resolver: Resolver, options?: Options) => {
 
     code = code.replace(commentRegex, match => {
       if (stringSensitive && stringLiterals.some(sl => match.startsWith(sl))) return match;
+
+      if (exclude?.some(regex => regex.test(match))) return match;
 
       matches.push(match);
       return replace ? '' : match;
@@ -61,7 +64,7 @@ this is a js multi-line comment
 */
 `;
 
-const jsCmtu = cmtu({ inline: '//.*', block: '/\\*(?:.|\n)*?\\*/' }, { stringSensitive: true });
+const jsCmtu = cmtu({ inline: '//.*', block: '/\\*(?:.|\n)*?\\*/' }, { stringSensitive: true , exclude: [/\/\/.*/]});
 
 const noComments = jsCmtu.strip(jsCode);
 
