@@ -1,4 +1,6 @@
 // * data
+import languages from './languages';
+
 const DEFAULT_STRING_LITERALS = ["'", '"', '`'];
 
 // * validators
@@ -55,6 +57,8 @@ const cmtu = (resolver: Resolver, options?: Options) => {
   };
 };
 
+cmtu.Languages = languages;
+
 module.exports = cmtu;
 
 const jsCode = `
@@ -69,10 +73,7 @@ this is a js multi-line comment
 */
 `;
 
-const jsCmtu = cmtu(
-  { inline: '//.*', block: '/\\*(?:.|\n)*?\\*/' },
-  { stringSensitive: true, exclude: [/\/\/.*/] }
-);
+const jsCmtu = cmtu(cmtu.Languages.JS.resolver);
 
 const noComments = jsCmtu.strip(jsCode);
 
