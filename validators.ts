@@ -1,4 +1,4 @@
-import Joi, { type Schema } from 'joi';
+import Joi, { string, valid, type Schema } from 'joi';
 
 // * types
 import type { Resolver } from './languages';
@@ -20,5 +20,19 @@ export const resolverValidator = (resolver: Resolver) => {
       inline: Joi.string().min(1).label('resolver.inline'),
       block: Joi.string().min(1).label('resolver.block'),
     })
+  );
+};
+
+export const stringLiteralsValidator = (stringLiterals?: string[]) => {
+  validate(
+    stringLiterals,
+    Joi.array()
+      .min(1)
+      .items(
+        Joi.string()
+          .min(1)
+          .messages({ 'string.empty': 'empty strings are not allowed as string literlas' })
+      )
+      .label('stringLiterals')
   );
 };
