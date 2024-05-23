@@ -57,6 +57,10 @@ const cmtu = (resolver: Resolver, options?: Options) => {
   };
 };
 
+cmtu.stringSensitive = (resolver: Resolver, options?: Omit<Options, 'stringSensitive'>) => {
+  return cmtu(resolver, { ...options, stringSensitive: true });
+};
+
 cmtu.Languages = languages;
 
 module.exports = cmtu;
@@ -73,7 +77,7 @@ this is a js multi-line comment
 */
 `;
 
-const jsCmtu = cmtu(cmtu.Languages.JS.resolver);
+const jsCmtu = cmtu.stringSensitive(cmtu.Languages.JS.resolver);
 
 const noComments = jsCmtu.strip(jsCode);
 
