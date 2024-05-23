@@ -10,9 +10,14 @@ const validate = (input: unknown, schema: Schema) => {
 };
 
 export const resolverValidator = (resolver: Resolver) => {
-  if (typeof resolver === 'string') validate(resolver, Joi.string().min(1).label('resolver'));
+  if (typeof resolver === 'string') {
+    return validate(resolver, Joi.string().min(1).label('resolver'));
+  }
 
-  validate(resolver, Joi.object().keys().min(1).message('"resolver" can not be an empty object'));
+  validate(
+    resolver,
+    Joi.object().keys().min(1).message('"resolver" can not be an empty object').label('resolver')
+  );
 
   validate(
     resolver,
