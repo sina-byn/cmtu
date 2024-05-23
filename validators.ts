@@ -1,4 +1,4 @@
-import Joi, { string, valid, type Schema } from 'joi';
+import Joi, { type Schema } from 'joi';
 
 // * types
 import type { Resolver } from './languages';
@@ -34,5 +34,21 @@ export const stringLiteralsValidator = (stringLiterals?: string[]) => {
           .messages({ 'string.empty': 'empty strings are not allowed as string literlas' })
       )
       .label('stringLiterals')
+  );
+};
+
+export const excludeValidator = (exclude?: RegExp[]) => {
+  const errorMessage = 'only RegExp objects are allowed as exclude items';
+
+  validate(
+    exclude,
+    Joi.array()
+      .items(
+        Joi.object()
+          .instance(RegExp)
+          .messages({ 'object.base': errorMessage, 'object.instance': errorMessage })
+      )
+      .min(1)
+      .messages({ 'array.min': '"exclude" must contain at least 1 item' })
   );
 };
