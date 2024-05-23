@@ -64,21 +64,3 @@ cmtu.stringSensitive = (resolver: Resolver, options?: Omit<Options, 'stringSensi
 cmtu.Languages = languages;
 
 module.exports = cmtu;
-
-const jsCode = `
-// this is a js comment
-
-this is not a js comment
-
-const callout = '// this is not a comment';
-
-/*
-this is a js multi-line comment
-*/
-`;
-
-const jsCmtu = cmtu.stringSensitive(cmtu.Languages.JS.resolver);
-
-const noComments = jsCmtu.strip(jsCode);
-
-console.log(noComments);
