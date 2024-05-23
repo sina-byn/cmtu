@@ -2,7 +2,7 @@
 const DEFAULT_STRING_LITERALS = ["'", '"', '`'];
 
 // * types
-type Resolver = string | { block: string } | { inline: string } | { block: string; inline: string };
+import { type Resolver } from './languages';
 
 type Options = {
   stringSensitive?: boolean;
@@ -64,7 +64,10 @@ this is a js multi-line comment
 */
 `;
 
-const jsCmtu = cmtu({ inline: '//.*', block: '/\\*(?:.|\n)*?\\*/' }, { stringSensitive: true , exclude: [/\/\/.*/]});
+const jsCmtu = cmtu(
+  { inline: '//.*', block: '/\\*(?:.|\n)*?\\*/' },
+  { stringSensitive: true, exclude: [/\/\/.*/] }
+);
 
 const noComments = jsCmtu.strip(jsCode);
 
