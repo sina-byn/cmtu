@@ -1,18 +1,20 @@
 {
   "name": "cmtu",
   "version": "1.0.0",
-  "description": "",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
+    "prepublish": "npm run build",
     "dev": "nodemon",
     "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sina Bayandorian <sina.sina.bayan@protonmail.com> (https://portfolio-sina-byn.vercel.app/)",
+  "description": "A Node.js utility library for easily removing, extracting, and manipulating comments in code strings with support for popular programming languages such as JavaScript, Python, and etc.",
+  "repository": "github:sina-byn/cmtu",
+  "homepage": "https://github.com/sina-byn/cmtu#readme",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
@@ -20,5 +22,35 @@
   },
   "dependencies": {
     "joi": "^17.13.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/sina-byn/cmtu/issues",
+    "email": "sina.sina.bayan@protonmail.com"
+  },
+  "keywords": [
+    "comment",
+    "comment-eraser",
+    "comment-remover",
+    "strip-comments",
+    "remove-comments",
+    "extract-comments",
+    "JS",
+    "TS",
+    "nodejs",
+    "javascript",
+    "JavaScript",
+    "TypeScript",
+    "code",
+    "code-cleanup",
+    "code-comments",
+    "code-analysis",
+    "code-manipulation",
+    "utils",
+    "utilities",
+    "utility-library",
+    "string",
+    "string-sensitive",
+    "syntax",
+    "parser"
+  ]
 }
