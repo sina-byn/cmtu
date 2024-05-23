@@ -1,8 +1,12 @@
 // * data
 const DEFAULT_STRING_LITERALS = ["'", '"', '`'];
 
+// * validators
+import { resolverValidator } from './validators';
+
 // * types
 import { type Resolver } from './languages';
+
 
 type Options = {
   stringSensitive?: boolean;
@@ -13,7 +17,7 @@ type Options = {
 const cmtu = (resolver: Resolver, options?: Options) => {
   const { stringSensitive, stringLiterals = DEFAULT_STRING_LITERALS, exclude } = options ?? {};
 
-  // * validation goes here
+  resolverValidator(resolver);
 
   let pattern = typeof resolver === 'string' ? resolver : Object.values(resolver).join('|');
 
