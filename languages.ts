@@ -3,7 +3,7 @@ type Languages = Record<LanguageName, Language>;
 
 type LanguageName = 'JS';
 
-type Language = { resolver: Resolver; options?: { stringLiterals?: string[] } };
+type Language = { resolver: Resolver; stringLiterals?: string[] };
 
 export type Resolver =
   | string
@@ -12,7 +12,10 @@ export type Resolver =
   | { block: string; inline: string };
 
 const languages: Languages = {
-  JS: { resolver: { inline: '//.*', block: '/\\*(?:.|\n)*?\\*/' } },
+  JS: {
+    resolver: { inline: '//.*', block: '/\\*(?:.|\n)*?\\*/' },
+    stringLiterals: ["'", '"', '`'],
+  },
 };
 
 export default languages;
